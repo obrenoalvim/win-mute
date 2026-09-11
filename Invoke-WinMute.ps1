@@ -21,13 +21,13 @@
     Windows 10 vs 11 is auto-detected; tweaks that only apply to one of them
     are filtered out automatically, no version to pick.
 .EXAMPLE
-    .\Invoke-PrivacyPurge.ps1
+    .\Invoke-WinMute.ps1
     Opens an interactive checklist (Out-GridView) to pick tweaks.
 .EXAMPLE
-    .\Invoke-PrivacyPurge.ps1 -Categories AI,Telemetry -All
+    .\Invoke-WinMute.ps1 -Categories AI,Telemetry -All
     Applies every AI and Telemetry tweak with no prompts.
 .EXAMPLE
-    .\Invoke-PrivacyPurge.ps1 -Undo
+    .\Invoke-WinMute.ps1 -Undo
     Reverts everything previously applied by this tool.
 #>
 [CmdletBinding()]
@@ -118,7 +118,7 @@ if (-not $SkipRestorePoint) {
     Write-Host 'Creating a System Restore point...' -ForegroundColor Cyan
     try {
         Enable-ComputerRestore -Drive "$env:SystemDrive\" -ErrorAction SilentlyContinue
-        Checkpoint-Computer -Description 'win-privacy-purge before changes' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
+        Checkpoint-Computer -Description 'win-mute before changes' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
     }
     catch { Write-Warning "Could not create a restore point: $_" }
 }

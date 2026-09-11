@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Friendly point-and-click window for win-privacy-purge. Double-click START-GUI.bat
+    Friendly point-and-click window for win-mute. Double-click START-GUI.bat
     if you don't want to deal with PowerShell directly.
 .NOTES
     Design: dark, calm "utility" look (Fluent-inspired, not a copy) with a single
@@ -55,7 +55,7 @@ $categoryIcon = @{
     Bloatware = [char]::ConvertFromUtf32(0x1F9F9); Privacy = [char]::ConvertFromUtf32(0x1F512)
 }
 
-# All GUI-visible strings, PT-BR and EN. The CLI (Invoke-PrivacyPurge.ps1) stays
+# All GUI-visible strings, PT-BR and EN. The CLI (Invoke-WinMute.ps1) stays
 # technical/English on purpose - this dictionary only feeds the friendly GUI.
 $S = @{
     pt = @{
@@ -176,7 +176,7 @@ function Get-FriendlyName($lang, $t) {
 [xml]$xaml = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Win Privacy Purge" Height="780" Width="960" MinWidth="760" MinHeight="560"
+        Title="Win Mute" Height="780" Width="960" MinWidth="760" MinHeight="560"
         WindowStartupLocation="CenterScreen" Background="#14161A"
         FontFamily="Segoe UI Variable Text, Segoe UI">
     <Window.Resources>
@@ -303,7 +303,7 @@ function Get-FriendlyName($lang, $t) {
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <TextBlock Text="&#128737;" FontSize="26" Foreground="{StaticResource Accent}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="Win Privacy Purge" Style="{StaticResource TitleText}" VerticalAlignment="Center"/>
+                    <TextBlock Text="Win Mute" Style="{StaticResource TitleText}" VerticalAlignment="Center"/>
                     <Border Background="#22262C" CornerRadius="12" Padding="10,4" Margin="12,0,0,0" VerticalAlignment="Center">
                         <TextBlock Name="OsBadge" Text="" FontSize="11.5" Foreground="{StaticResource Accent}"/>
                     </Border>
@@ -477,7 +477,7 @@ function Invoke-Tweaks($selected) {
     Write-Log $strings.log.creating_restore
     try {
         Enable-ComputerRestore -Drive "$env:SystemDrive\" -ErrorAction SilentlyContinue
-        Checkpoint-Computer -Description 'win-privacy-purge before changes' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
+        Checkpoint-Computer -Description 'win-mute before changes' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
         Write-Log $strings.log.restore_created
     }
     catch { Write-Log ($strings.log.restore_failed -f $_) }

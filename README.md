@@ -1,4 +1,4 @@
-# win-privacy-purge
+# win-mute
 
 English | [Português](README.pt-BR.md)
 
@@ -10,11 +10,11 @@ binary.
 
 Two ways in:
 
-- **GUI** (`Start-PrivacyPurgeGui.ps1`, or double-click `START-GUI.bat`). One
+- **GUI** (`Start-WinMuteGui.ps1`, or double-click `START-GUI.bat`). One
   big "Apply now" button, an optional detailed list, self-elevates to admin,
   switches between PT-BR and EN with one click. For people who don't want to
   touch PowerShell.
-- **CLI** (`Invoke-PrivacyPurge.ps1`). Flags for no-prompt runs, or an
+- **CLI** (`Invoke-WinMute.ps1`). Flags for no-prompt runs, or an
   `Out-GridView` picker if you run it with no arguments. For people already
   comfortable in a terminal.
 
@@ -64,7 +64,7 @@ holes, and that trade isn't worth making even under `-All`.
 
 ### GUI (non-technical users)
 
-Double-click `START-GUI.bat` (or run `Start-PrivacyPurgeGui.ps1`). It asks
+Double-click `START-GUI.bat` (or run `Start-WinMuteGui.ps1`). It asks
 for elevation itself (a UAC prompt) if you didn't launch it as admin. It
 shows the detected Windows version at the top, one big "Apply now" button
 for the recommended safe tweaks, and a "Customize" section (collapsed by
@@ -77,25 +77,25 @@ Run PowerShell **as Administrator**.
 
 ```powershell
 # Interactive checklist (Out-GridView), pick what you want, click OK
-.\Invoke-PrivacyPurge.ps1
+.\Invoke-WinMute.ps1
 
 # Apply everything in one or more categories, no prompts
-.\Invoke-PrivacyPurge.ps1 -Categories AI,Telemetry -All
+.\Invoke-WinMute.ps1 -Categories AI,Telemetry -All
 
 # Apply only the tweaks with no functional downside
-.\Invoke-PrivacyPurge.ps1 -All -SafeOnly
+.\Invoke-WinMute.ps1 -All -SafeOnly
 
 # Apply specific tweaks by id
-.\Invoke-PrivacyPurge.ps1 -Ids AI01,AI02,TEL02
+.\Invoke-WinMute.ps1 -Ids AI01,AI02,TEL02
 
 # Check what's currently applied vs not, per tweak
-.\Invoke-PrivacyPurge.ps1 -Report
+.\Invoke-WinMute.ps1 -Report
 
 # Revert everything this tool has applied
-.\Invoke-PrivacyPurge.ps1 -Undo
+.\Invoke-WinMute.ps1 -Undo
 
 # Skip the automatic System Restore point (faster, less safe)
-.\Invoke-PrivacyPurge.ps1 -All -SkipRestorePoint
+.\Invoke-WinMute.ps1 -All -SkipRestorePoint
 ```
 
 A System Restore point is created by default before any change, unless you
@@ -129,6 +129,6 @@ removed inbox app.
 
 Add a new `[PSCustomObject]` with `Id`, `Category`, `Risk`, `Name`,
 `Description`, `Apply`, `Revert`, `Test` to the matching file in `modules/`.
-`Invoke-PrivacyPurge.ps1` picks it up automatically, no registration step.
+`Invoke-WinMute.ps1` picks it up automatically, no registration step.
 To show a translated label in the GUI, add the same `Id` to both
-`$S.pt.tweaks` and `$S.en.tweaks` in `Start-PrivacyPurgeGui.ps1`.
+`$S.pt.tweaks` and `$S.en.tweaks` in `Start-WinMuteGui.ps1`.

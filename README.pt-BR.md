@@ -1,4 +1,4 @@
-# win-privacy-purge
+# win-mute
 
 [English](README.md) | Português
 
@@ -10,11 +10,11 @@ binario fechado.
 
 Duas portas de entrada:
 
-- **GUI** (`Start-PrivacyPurgeGui.ps1`, ou clique duplo em `START-GUI.bat`).
+- **GUI** (`Start-WinMuteGui.ps1`, ou clique duplo em `START-GUI.bat`).
   Janela com botao unico "Aplicar agora", lista detalhada opcional, pede
   elevacao de admin sozinha (prompt de UAC), troca entre PT-BR e EN num
   clique. Pra quem nao manja de PowerShell.
-- **CLI** (`Invoke-PrivacyPurge.ps1`). Flags pra rodar sem prompt, ou um
+- **CLI** (`Invoke-WinMute.ps1`). Flags pra rodar sem prompt, ou um
   seletor `Out-GridView` se rodar sem argumento nenhum. Pra quem ja usa
   terminal no dia a dia.
 
@@ -65,7 +65,7 @@ sem patch de seguranca, e essa troca nao vale a pena nem no `-All`.
 
 ### GUI (usuario nao tecnico)
 
-Clique duplo em `START-GUI.bat` (ou rode `Start-PrivacyPurgeGui.ps1`). Ela
+Clique duplo em `START-GUI.bat` (ou rode `Start-WinMuteGui.ps1`). Ela
 pede elevacao sozinha (prompt de UAC) se voce nao abriu como admin. Mostra a
 versao do Windows detectada no topo, um botao grande "Aplicar agora" com os
 ajustes seguros recomendados, e uma secao "Personalizar ajustes" (fechada por
@@ -78,25 +78,25 @@ Rode o PowerShell **como Administrador**.
 
 ```powershell
 # Lista interativa (Out-GridView), escolhe o que quiser e clica OK
-.\Invoke-PrivacyPurge.ps1
+.\Invoke-WinMute.ps1
 
 # Aplica tudo de uma ou mais categorias, sem prompt
-.\Invoke-PrivacyPurge.ps1 -Categories AI,Telemetry -All
+.\Invoke-WinMute.ps1 -Categories AI,Telemetry -All
 
 # Aplica so o que nao tem nenhum efeito colateral
-.\Invoke-PrivacyPurge.ps1 -All -SafeOnly
+.\Invoke-WinMute.ps1 -All -SafeOnly
 
 # Aplica ajustes especificos por id
-.\Invoke-PrivacyPurge.ps1 -Ids AI01,AI02,TEL02
+.\Invoke-WinMute.ps1 -Ids AI01,AI02,TEL02
 
 # Mostra o que ja esta aplicado ou nao, ajuste por ajuste
-.\Invoke-PrivacyPurge.ps1 -Report
+.\Invoke-WinMute.ps1 -Report
 
 # Reverte tudo que essa ferramenta ja aplicou
-.\Invoke-PrivacyPurge.ps1 -Undo
+.\Invoke-WinMute.ps1 -Undo
 
 # Pula o ponto de restauracao automatico (mais rapido, menos seguro)
-.\Invoke-PrivacyPurge.ps1 -All -SkipRestorePoint
+.\Invoke-WinMute.ps1 -All -SkipRestorePoint
 ```
 
 Por padrao a ferramenta cria um ponto de restauracao antes de qualquer
@@ -130,6 +130,6 @@ copia local de um app de fabrica removido.
 
 Cria um `[PSCustomObject]` novo com `Id`, `Category`, `Risk`, `Name`,
 `Description`, `Apply`, `Revert`, `Test` no arquivo certo dentro de
-`modules/`. O `Invoke-PrivacyPurge.ps1` pega automatico, sem passo de
+`modules/`. O `Invoke-WinMute.ps1` pega automatico, sem passo de
 cadastro. Pra aparecer traduzido na GUI, adiciona o mesmo `Id` no dicionario
-`$S.pt.tweaks` e `$S.en.tweaks` dentro de `Start-PrivacyPurgeGui.ps1`.
+`$S.pt.tweaks` e `$S.en.tweaks` dentro de `Start-WinMuteGui.ps1`.
