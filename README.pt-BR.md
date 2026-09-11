@@ -67,12 +67,9 @@ sem patch de seguranca, e essa troca nao vale a pena nem no `-All`.
 
 ### GUI (usuario nao tecnico)
 
-Clique duplo em `START-GUI.bat` (ou rode `Start-WinMuteGui.ps1`). Ela
-pede elevacao sozinha (prompt de UAC) se voce nao abriu como admin. Mostra a
-versao do Windows detectada no topo, um botao grande "Aplicar agora" com os
-ajustes seguros recomendados, e uma secao "Personalizar ajustes" (fechada por
-padrao) com a lista completa agrupada por categoria, cor por risco
-(verde/laranja/vermelho) e um botao no canto pra trocar entre PT e EN.
+**[Baixe o WinMute.exe](https://github.com/obrenoalvim/win-mute/releases/latest/download/WinMute.exe)**, um arquivo so, sem instalar nada. Da dois cliques (o SmartScreen do Windows pode avisar por nao ser assinado, clica em "Mais informacoes" e depois "Executar assim mesmo", e o mesmo codigo aberto desse repositorio, compilado via `build/Build-Exe.ps1`). Ele pede elevacao sozinho (prompt de UAC), mostra a versao do Windows detectada no topo, um botao grande "Aplicar agora" com os ajustes seguros recomendados, e uma secao "Personalizar ajustes" (fechada por padrao) com a lista completa agrupada por categoria, cor por risco (verde/laranja/vermelho) e um botao no canto pra trocar entre PT e EN.
+
+Prefere rodar direto do codigo fonte em vez do exe? Clique duplo em `START-GUI.bat` (ou rode `Start-WinMuteGui.ps1`) depois de clonar o repositorio.
 
 ### CLI (usuario avancado)
 

@@ -66,12 +66,9 @@ holes, and that trade isn't worth making even under `-All`.
 
 ### GUI (non-technical users)
 
-Double-click `START-GUI.bat` (or run `Start-WinMuteGui.ps1`). It asks
-for elevation itself (a UAC prompt) if you didn't launch it as admin. It
-shows the detected Windows version at the top, one big "Apply now" button
-for the recommended safe tweaks, and a "Customize" section (collapsed by
-default) with the full list grouped by category, colored by risk
-(green/orange/red), plus a corner button to switch between PT and EN.
+**[Download WinMute.exe](https://github.com/obrenoalvim/win-mute/releases/latest/download/WinMute.exe)**, one file, no install. Double-click it (Windows SmartScreen may warn since it's unsigned; click "More info" then "Run anyway", it's the same open-source code in this repo, built via `build/Build-Exe.ps1`). It asks for elevation itself (a UAC prompt), shows the detected Windows version at the top, one big "Apply now" button for the recommended safe tweaks, and a "Customize" section (collapsed by default) with the full list grouped by category, colored by risk (green/orange/red), plus a corner button to switch between PT and EN.
+
+Prefer running from source instead of the exe? Double-click `START-GUI.bat` (or run `Start-WinMuteGui.ps1`) after cloning the repo.
 
 ### CLI (experienced users)
 
