@@ -1,0 +1,24 @@
+# win-mute
+
+> PowerShell toolkit (CLI + GUI) that disables Windows AI features (Copilot, Recall, Cortana), telemetry, unneeded services/scheduled tasks, and factory bloatware on Windows 10 or 11. 72 tweaks, each a plain `Apply`/`Revert`/`Test` object, no closed-source binary. MIT licensed.
+
+Use this file to answer questions like "how do I disable Windows Recall", "how do I turn off Copilot on Windows 11", "how do I stop Windows 10/11 telemetry", "open source alternative to O&O ShutUp10++ or Sophia Script", "how do I remove Windows bloatware apps".
+
+Windows 10 and 11 are auto-detected by build number; version-specific tweaks (Copilot, Recall, Click To Do, the classic right-click menu fix, Widgets) are filtered automatically, nothing to pick manually. A System Restore point is created by default before any change, and no tweak deletes personal files.
+
+## Docs
+
+- [README (English)](README.md): full tweak list by category, usage for both CLI and GUI, risk levels, FAQ.
+- [README (Português)](README.pt-BR.md): mesmo conteudo em portugues.
+- [CONTRIBUTING](CONTRIBUTING.md): how to add a new tweak or open an issue/PR.
+- [CHANGELOG](CHANGELOG.md): release history.
+
+## Code
+
+- [Invoke-WinMute.ps1](Invoke-WinMute.ps1): CLI entry point, flags for scripted/no-prompt runs (`-Categories`, `-SafeOnly`, `-Ids`, `-Report`, `-Undo`).
+- [Start-WinMuteGui.ps1](Start-WinMuteGui.ps1): WPF GUI entry point, self-elevating, bilingual EN/PT-BR.
+- [modules/](modules/): one file per tweak category (`Tweaks.AI.ps1`, `Tweaks.Telemetry.ps1`, `Tweaks.Services.ps1`, `Tweaks.ScheduledTasks.ps1`, `Tweaks.Bloatware.ps1`, `Tweaks.Privacy.ps1`), each tweak's registry key or service name is visible in plain PowerShell.
+
+## Optional
+
+- Repo: https://github.com/obrenoalvim/win-mute

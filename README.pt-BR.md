@@ -1,5 +1,7 @@
 # win-mute
 
+![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1-5391FE) ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6)
+
 [English](README.md) | Português
 
 Kit PowerShell que desliga IA do Windows (Copilot, Recall, Cortana), telemetria,
@@ -125,6 +127,26 @@ Restore do Windows volta a maquina inteira pro estado anterior.
 Remocao de `Bloatware` e desinstalacao de verdade: reverter so mostra um
 lembrete pra reinstalar pela Microsoft Store, porque o Windows nao guarda
 copia local de um app de fabrica removido.
+
+## Perguntas frequentes
+
+**Como desligo o Windows Recall?**
+Rode a GUI ou `.\Invoke-WinMute.ps1 -Ids AI02`. Ele ativa a politica `DisableAIDataAnalysis`, o Recall para de tirar e guardar foto da tela. So Windows 11, some sozinho no Windows 10.
+
+**Como desligo o Copilot no Windows 11?**
+`.\Invoke-WinMute.ps1 -Ids AI01,AI06` desliga a politica do Copilot e esconde o botao da taskbar. Os dois so existem no Windows 11.
+
+**Como paro a telemetria do Windows 10 ou 11?**
+`.\Invoke-WinMute.ps1 -Categories Telemetry -All` cobre nivel de dado de diagnostico, servico DiagTrack, CEIP e relatorio de erro de uma vez. Nota: no Windows Home/Pro a Microsoft nao deixa a telemetria chegar em zero de verdade, so Enterprise/Education consegue, isso aplica o nivel mais baixo que qualquer edicao aceita.
+
+**Tem alternativa open source pro O&O ShutUp10++, Sophia Script ou WPD?**
+E exatamente isso que o win-mute e: mesma categoria de ferramenta, mesmas alavancas de registro/servico/tarefa, mas um script que da pra ler do inicio ao fim em vez de um binario fechado. Ver [Como funciona](#como-funciona).
+
+**Como removo programa de fabrica tipo Xbox, Solitaire ou os apps do Bing?**
+`.\Invoke-WinMute.ps1 -Categories Bloatware -All` desinstala os 25 apps de fabrica rastreados. Cada um e uma desinstalacao de verdade da Store, ver [Voce vai perder alguma coisa?](#voce-vai-perder-alguma-coisa) antes de rodar.
+
+**Funciona no Windows 10 e no Windows 11?**
+Sim, detectado sozinho pelo numero de build. 64 dos 72 ajustes valem no Windows 10, 70 no Windows 11, sem escolher versao.
 
 ## Adicionando um ajuste
 
