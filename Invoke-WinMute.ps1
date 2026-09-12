@@ -58,7 +58,10 @@ function Get-AllTweaks {
 }
 
 function Get-AppliedLog {
-    if (Test-Path $logPath) { @(Get-Content $logPath -Raw | ConvertFrom-Json) } else { @() }
+    # The leading comma stops PowerShell from unrolling a 1-element array back
+    # into a bare object when the function's output crosses the return boundary
+    # (classic gotcha: happens only via a function call, not a direct @() assign).
+    if (Test-Path $logPath) { , @(Get-Content $logPath -Raw | ConvertFrom-Json) } else { , @() }
 }
 
 function Save-AppliedLog($entries) {
@@ -66,7 +69,7 @@ function Save-AppliedLog($entries) {
 }
 
 $currentOS = Get-WindowsMajor
-Write-Host "Detected: $currentOS (build $((Get-CimInstance Win32_OperatingSystem).BuildNumber))" -ForegroundColor DarkCyan
+Write-Host "Detected: $currentOS (build $(Get-WindowsBuildNumber))" -ForegroundColor DarkCyan
 
 $tweaks = Get-CompatibleTweaks -Tweaks (Get-AllTweaks) -CurrentOS $currentOS
 if ($Categories) { $tweaks = $tweaks | Where-Object { $_.Category -in $Categories } }
