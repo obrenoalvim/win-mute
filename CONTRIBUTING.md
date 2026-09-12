@@ -16,6 +16,7 @@ Comment asking to be assigned before you start working. Wait for confirmation. O
 
 - Reference the issue it closes (`closes #123`)
 - Never force-push to a PR branch, it breaks re-review. Push new commits instead, they get squashed on merge.
+- Run `Invoke-Pester tests/` before opening the PR. Pester ships inline with Windows PowerShell 5.1, no install needed.
 
 ## Reviews
 

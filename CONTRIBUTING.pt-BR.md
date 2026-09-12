@@ -16,6 +16,7 @@ Comente pedindo pra ser designado antes de começar a trabalhar. Espere a confir
 
 - Referencie a issue que fecha (`closes #123`)
 - Nunca dê force-push na branch do PR, isso quebra o re-review. Suba commits novos, eles são squashados no merge.
+- Rode `Invoke-Pester tests/` antes de abrir o PR. O Pester já vem com o Windows PowerShell 5.1, não precisa instalar nada.
 
 ## Reviews
 

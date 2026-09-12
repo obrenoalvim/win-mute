@@ -51,9 +51,13 @@ function Remove-Bloat {
     Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Where-Object DisplayName -eq $Name | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Out-Null
 }
 
+function Get-WindowsBuildNumber {
+    try { return [int](Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).BuildNumber }
+    catch { return [System.Environment]::OSVersion.Version.Build }
+}
+
 function Get-WindowsMajor {
-    $build = [int](Get-CimInstance Win32_OperatingSystem).BuildNumber
-    if ($build -ge 22000) { 'Win11' } else { 'Win10' }
+    if ((Get-WindowsBuildNumber) -ge 22000) { 'Win11' } else { 'Win10' }
 }
 
 function Get-CompatibleTweaks {
