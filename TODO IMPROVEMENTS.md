@@ -1,6 +1,6 @@
 # TODO IMPROVEMENTS
 
-> Last updated: 2026-09-11
+> Last updated: 2026-09-12
 
 ## Pending Changes
 
@@ -31,11 +31,20 @@
 - **Risk:** None to existing behavior, but it's a new UI element and interaction, not a one-line fix.
 - **Effort:** Low-Medium.
 
-### Registry-touching helpers have no test coverage
+### Service/task/Appx helpers still have no test coverage
 - **Category:** Test
-- **Source:** `tests/Modules.Tests.ps1` (added this cycle) covers the pure/data-shape logic (`Get-CompatibleTweaks`, tweak schema, `Get-WindowsMajor`) but not `Set-Reg`, `Remove-Reg`, `Disable-Svc`, `Enable-Svc`, `Disable-Task`, `Enable-Task`, `Remove-Bloat` — anything that actually touches the registry, services, tasks, or Appx packages.
-- **What:** Add tests for these against a disposable `HKCU:\Software\WinMuteTests\...` key (registry helpers are testable this way without admin or real risk) or `-WhatIf`-style dry runs once the dry-run feature above exists. Service/task/Appx helpers are harder to test safely (they touch real system state) and probably need a thin mockable wrapper first.
-- **Where:** New `tests/Helpers.Tests.ps1`.
-- **Why:** These are the functions every single tweak calls; a regression here breaks everything silently.
-- **Risk:** Needs a decision on how much to mock vs. touch a real (harmless) test registry key; not a one-line addition.
+- **Source:** `tests/Helpers.Tests.ps1` (added this cycle) now covers `Set-Reg`, `Remove-Reg`, and `Test-RegValue` against a disposable `HKCU:\Software\WinMuteTests\...` key. `Disable-Svc`, `Enable-Svc`, `Disable-Task`, `Enable-Task`, `Remove-Bloat` are still untested.
+- **What:** These touch real services, scheduled tasks, and Appx packages, so they can't reuse the same "disposable registry key" trick safely. Needs a thin mockable wrapper (e.g. injecting `Get-Service`/`Get-ScheduledTask`/`Get-AppxPackage` as parameters, or a Pester mock) before they can be tested without real system side effects, or `-WhatIf`-style dry runs once the dry-run feature below exists.
+- **Where:** `tests/Helpers.Tests.ps1` or a new file alongside it.
+- **Why:** These are the functions every single Service/ScheduledTasks/Bloatware tweak calls; a regression here breaks everything silently.
+- **Risk:** Needs a decision on how much to mock vs. accept real (harmless) system-state changes in CI; not a one-line addition.
 - **Effort:** Medium.
+
+### Undo silently drops the applied-tweak log entry for a revert that failed
+- **Category:** Bug
+- **Source:** Read-through of the `-Undo` path in `Invoke-WinMute.ps1` and `BtnUndo.Add_Click` in `Start-WinMuteGui.ps1`.
+- **What:** Both loop over `logs/applied.json`, call `& $tweak.Revert` inside a try/catch that only warns/logs on failure, then unconditionally delete the whole log file once the loop finishes. If a `Revert` throws, that tweak was never actually rolled back, but its entry disappears from the log anyway — a later `-Undo` or `-Report` run has no record that it's still applied.
+- **Where:** `Invoke-WinMute.ps1` (~line 86-99, the `$Undo` block); `Start-WinMuteGui.ps1` (~line 521-535, `BtnUndo.Add_Click`).
+- **Why:** Defeats the one piece of state (`logs/applied.json`) this tool relies on to make Undo trustworthy — and only surfaces in exactly the case (a failing revert) where an accurate log matters most.
+- **Risk:** Needs a decision on the right behavior (keep failed entries in the log vs. write them to a separate "needs manual revert" list) — not a one-line fix.
+- **Effort:** Low-Medium.
