@@ -1,8 +1,26 @@
+<div align="center">
+
+<img src=".github/logo.svg" alt="win-mute logo" width="120" height="120">
+
 # win-mute
 
-![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97) ![PowerShell](https://img.shields.io/badge/PowerShell-5.1-5391FE) ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6)
+**Turn off Windows AI, telemetry and bloatware with a script you can read.**<br>
+A PowerShell toolkit for Windows 10 and 11: Copilot, Recall, Cortana, telemetry, unneeded services and preinstalled apps. 72 tweaks, each with its own Apply, Revert and Test, and a one-click GUI.
 
-English | [Português](README.pt-BR.md)
+[![Download WinMute.exe](https://img.shields.io/badge/Download-WinMute.exe-3DDC97?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/obrenoalvim/win-mute/releases/latest/download/WinMute.exe)
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-3DDC97)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/obrenoalvim/win-mute?style=flat&logo=github&color=3b9eff)](https://github.com/obrenoalvim/win-mute/stargazers)
+[![PowerShell 5.1](https://img.shields.io/badge/PowerShell-5.1-5391FE?logo=powershell&logoColor=white)](Invoke-WinMute.ps1)
+[![Windows 10 | 11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows&logoColor=white)](#faq)
+
+**English** · [Português](README.pt-BR.md)
+
+[How it works](#how-it-works) · [Usage](#usage) · [Safety](#will-you-lose-anything) · [FAQ](#faq) · [Adding a tweak](#adding-a-tweak)
+
+</div>
+
+---
 
 PowerShell toolkit that turns off Windows AI (Copilot, Recall, Cortana),
 telemetry, unneeded services/scheduled tasks, and bloatware on **Windows 10
@@ -151,3 +169,27 @@ Add a new `[PSCustomObject]` with `Id`, `Category`, `Risk`, `Name`,
 `Invoke-WinMute.ps1` picks it up automatically, no registration step.
 To show a translated label in the GUI, add the same `Id` to both
 `$S.pt.tweaks` and `$S.en.tweaks` in `Start-WinMuteGui.ps1`.
+
+## More Windows tools by the same author
+
+- [**rigdeck**](https://github.com/obrenoalvim/rigdeck): a Stream Deck with no hardware, controlled from your phone.
+- [**claude-usage-tray**](https://github.com/obrenoalvim/claude-usage-tray): a tray icon with your Claude Code 5-hour usage.
+- [**echoport**](https://github.com/obrenoalvim/echoport): a real-time localhost port scanner for developers.
+
+## Contributing
+
+Know a tweak people complain about, or one that misfires on your build? Open an issue or a PR. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [changelog](CHANGELOG.md).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+
+If win-mute gave you your desktop back, a ⭐ helps other people find it.
+
+<sub>**Topics:** windows11 · windows10 · copilot · recall · telemetry · debloat · privacy · powershell · windows-tweaks · windows-debloater</sub>
+
+</div>
